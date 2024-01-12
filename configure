@@ -1,0 +1,4 @@
+mkdir libs
+curl --insecure -o libs/ch376lib.tgz http://repo.orix.oric.org/dists/2023.4/tgz/6502/ch376lib.tgz
+cd libs/ && tar xvfz ch376lib.tgz && cd ..
+rm libs/ch376lib.tgz
