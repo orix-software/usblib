@@ -8,9 +8,9 @@ ORICUTRON="/mnt/c/Users/plifp/OneDrive/oric/oricutron_wsl/oricutron"
 
 ca65 -ttelestrat src/usbrom.s  -o usbrom.ld65
 ld65 -tnone usbrom.ld65 libs/lib8/ch376.lib -o usb.rom
-# cp h $ORICUTRON/sdcard/bin
+cl65 -I include/ -ttelestrat test/lsusb.c build/lib8/usb.lib
 
-cl65 -I include/ -ttelestrat test/lsusb.c
+cl65 -I include/ -ttelestrat test/mouse.c src/hid/mouse/mouse.s libs/lib8/ch376.lib -o usbmouse
 
 # cp autoboot $ORICUTRON/sdcard/etc/
 
