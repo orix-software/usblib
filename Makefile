@@ -1,5 +1,6 @@
 
-SOURCES8=$(wildcard src/c/*.s)
+SOURCES8=$(wildcard src/*.s)
+
 OBJECTS8=$(SOURCES8:.s=.o)
 
 ifeq ($(CC65_HOME),)
@@ -15,7 +16,7 @@ else
 endif
 
 
-all: init $(SOURCES8) $(OBJECTS8) archive test
+all: init $(SOURCES8) $(OBJECTS8) rom archive test
 
 .phony: all
 
@@ -25,6 +26,15 @@ init:
 $(OBJECTS8): $(SOURCES8)
 	$(AS) -ttelestrat $(@:.o=.s) -o $@
 	$(AR) r build/lib8/usb.lib  $@
+
+# $(OBJECTS8): $(SOURCES8ASM)
+# 	$(AS) -ttelestrat $(@:.o=.s) -o $@
+# 	$(AR) r build/lib8/usb.lib  $@
+
+rom:
+	ca65 -ttelestrat src/commands/_udevadm.s -o _udevadm.ld65
+	ca65 -ttelestrat src/rom/udevrom.s   -o usbrom.ld65
+	ld65 -tnone usbrom.ld65 libs/lib8/ch376.lib  _udevadm.ld65 -o udev.rom
 
 archive:
 	#mkdir build/usr/include/ -p

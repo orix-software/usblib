@@ -2,6 +2,10 @@ struct libusb_device;
 
 typedef struct libusb_device libusb_device;
 
+typedef struct libusb_context libusb_context;
+
+
+
 //unsigned char libusb_init(libusb_context **ctx);
 /*
 struct usb_device {
@@ -68,4 +72,8 @@ struct usb_device *usb_get_device_no_address();
 
 unsigned char libusb_get_device_list(void *ctx, libusb_device ***list);
 unsigned char libusb_init(void *param);
-void libusb_exit(void *param);
+void          libusb_exit(void *param);
+
+
+int 	libusb_get_device_descriptor (libusb_device *dev, struct libusb_device_descriptor *desc);
+void 	libusb_free_device_list (libusb_device **list, int unref_devices);

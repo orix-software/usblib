@@ -123,6 +123,7 @@
 ; 550 RETURN
 
 .proc _get_hid_mouse_state
+    ; Attention Commenté ici parce qu'il faut détecter d'abord les devices
     ; sta     ptr1
     ; stx     ptr1+1
     ; jsr     popax

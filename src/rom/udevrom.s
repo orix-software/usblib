@@ -4,29 +4,31 @@
 
 userzp := $80 ; FIXME
 
+.import _udevadm
+
 .org $c000
 
 .code
 rom_start:
         rts
 
+;.include "../commands/_udevadm.s"
+
 rom_signature:
-	.ASCIIZ   "Usb v2023.4"
+	.asciiz   "Udev v2024.1"
 
-_diagusb:
-        rts
 
-command1_str:
-        .ASCIIZ "diagusb"
+udevadm_str:
+        .asciiz "udevadm"
 
 commands_text:
-        .addr command1_str
+        .addr udevadm_str
 
 commands_address:
-        .addr _diagusb
+        .addr _udevadm
 
 commands_version:
-        .ASCIIZ "0.0.1"
+        .asciiz "0.0.1"
 
 ; ----------------------------------------------------------------------------
 ; Copyrights address
@@ -49,7 +51,7 @@ adress_commands:
         .addr commands_address
 ; fff5
 list_commands:
-        .addr command1_str
+        .addr udevadm_str
 ; $fff7
 number_of_commands:
         .byt 1
